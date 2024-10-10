@@ -1,0 +1,406 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "GateConnect-InsightOps",
+    "description" : "API access for rapid integration",
+    "termsOfService" : "https://www.gateai.ai/terms-of-service",
+    "contact" : {
+      "name" : "GateConnect",
+      "email" : "support@gateai.ai"
+    },
+    "version" : "2024-10-10T12:17:35Z"
+  },
+  "externalDocs" : {
+    "description" : "Find out more about how GateAI can help",
+    "url" : "https://gateai.document360.io/docs"
+  },
+  "servers" : [ {
+    "url" : "https://ikkdcom6ee.execute-api.us-west-2.amazonaws.com/{basePath}",
+    "variables" : {
+      "basePath" : {
+        "default" : "DEV"
+      }
+    }
+  } ],
+  "paths" : {
+    "/v1/digital-worker/job/status" : {
+      "get" : {
+        "description" : "Get status of the job using job ID",
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/JobStatusModel"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "GateConnect" : [ ]
+        } ]
+      }
+    },
+    "/v1/digital-worker/workers" : {
+      "get" : {
+        "description" : "API to retrieve all workers with associated variables required to run the worker. ",
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/WorkerListModel"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "GateConnect" : [ ]
+        } ]
+      }
+    },
+    "/v1/digital-worker/get-file" : {
+      "post" : {
+        "description" : "Use this endpoint to get the file download url in return of the fileKey",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/FileDetailInputModel"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FileDetailOutputModel"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "GateConnect" : [ ]
+        } ]
+      }
+    },
+    "/v1/digital-worker/job/schedule" : {
+      "post" : {
+        "description" : "Schedule worker jobs using this endpoint. ",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/JobConfigModel"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/JobConfigResultsModel"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "GateConnect" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "FileDetailOutputModel" : {
+        "required" : [ "url" ],
+        "type" : "object",
+        "properties" : {
+          "url" : {
+            "type" : "string",
+            "format" : "uri"
+          }
+        }
+      },
+      "JobConfigResultsModel" : {
+        "required" : [ "updatedJob" ],
+        "type" : "object",
+        "properties" : {
+          "updatedJob" : {
+            "required" : [ "__v", "_id", "documentIds", "jobInput", "results", "runId", "scheduledAt", "scheduledBy", "status", "workerId" ],
+            "type" : "object",
+            "properties" : {
+              "_id" : {
+                "type" : "string"
+              },
+              "workerId" : {
+                "type" : "string"
+              },
+              "jobInput" : {
+                "type" : "object",
+                "additionalProperties" : {
+                  "type" : "string"
+                }
+              },
+              "status" : {
+                "type" : "string",
+                "enum" : [ "scheduled", "success" ]
+              },
+              "scheduledBy" : {
+                "type" : "string"
+              },
+              "scheduledAt" : {
+                "type" : "string",
+                "format" : "date-time"
+              },
+              "documentIds" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "results" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object"
+                }
+              },
+              "__v" : {
+                "type" : "integer"
+              },
+              "runId" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      },
+      "JobStatusModel" : {
+        "required" : [ "__v", "_id", "createdBy", "documents", "jobInput", "results", "runId", "scheduledAt", "scheduledBy", "status", "workerId" ],
+        "type" : "object",
+        "properties" : {
+          "_id" : {
+            "type" : "string"
+          },
+          "workerId" : {
+            "type" : "string"
+          },
+          "jobInput" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "scheduled", "success" ]
+          },
+          "scheduledBy" : {
+            "type" : "string"
+          },
+          "scheduledAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "results" : {
+            "type" : "array",
+            "items" : {
+              "required" : [ "enrichedFileKey", "hashedFileKey", "taskResults" ],
+              "type" : "object",
+              "properties" : {
+                "hashedFileKey" : {
+                  "type" : "string"
+                },
+                "enrichedFileKey" : {
+                  "type" : "string"
+                },
+                "taskResults" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          },
+          "__v" : {
+            "type" : "integer"
+          },
+          "runId" : {
+            "type" : "string"
+          },
+          "documents" : {
+            "type" : "array",
+            "items" : {
+              "required" : [ "__v", "_id", "active", "createdAt", "createdBy", "errVariables", "fileKey", "hashedFileKey", "instructions", "name", "templateId", "updatedAt", "variablesUsed", "version" ],
+              "type" : "object",
+              "properties" : {
+                "_id" : {
+                  "type" : "string"
+                },
+                "templateId" : {
+                  "type" : "string"
+                },
+                "name" : {
+                  "type" : "string"
+                },
+                "createdBy" : {
+                  "type" : "string"
+                },
+                "fileKey" : {
+                  "type" : "string"
+                },
+                "active" : {
+                  "type" : "boolean"
+                },
+                "version" : {
+                  "type" : "integer"
+                },
+                "variablesUsed" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object"
+                  }
+                },
+                "errVariables" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object"
+                  }
+                },
+                "instructions" : {
+                  "type" : "array",
+                  "items" : {
+                    "required" : [ "_id", "condition", "hash", "lookupSource" ],
+                    "type" : "object",
+                    "properties" : {
+                      "condition" : {
+                        "type" : "string"
+                      },
+                      "lookupSource" : {
+                        "type" : "string"
+                      },
+                      "hash" : {
+                        "type" : "string"
+                      },
+                      "_id" : {
+                        "type" : "string"
+                      }
+                    }
+                  }
+                },
+                "createdAt" : {
+                  "type" : "string",
+                  "format" : "date-time"
+                },
+                "updatedAt" : {
+                  "type" : "string",
+                  "format" : "date-time"
+                },
+                "__v" : {
+                  "type" : "integer"
+                },
+                "hashedFileKey" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "createdBy" : {
+            "type" : "object"
+          }
+        }
+      },
+      "WorkerListModel" : {
+        "type" : "array",
+        "items" : {
+          "required" : [ "__v", "_id", "createdAt", "createdBy", "name", "requiredVariables", "updatedAt" ],
+          "type" : "object",
+          "properties" : {
+            "_id" : {
+              "type" : "string"
+            },
+            "name" : {
+              "type" : "string"
+            },
+            "createdBy" : {
+              "type" : "string"
+            },
+            "createdAt" : {
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "updatedAt" : {
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "__v" : {
+              "type" : "integer"
+            },
+            "requiredVariables" : {
+              "type" : "array",
+              "items" : {
+                "required" : [ "_id", "varId", "varName" ],
+                "type" : "object",
+                "properties" : {
+                  "varId" : {
+                    "type" : "string"
+                  },
+                  "varName" : {
+                    "type" : "string"
+                  },
+                  "_id" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "FileDetailInputModel" : {
+        "required" : [ "fileKey" ],
+        "type" : "object",
+        "properties" : {
+          "fileKey" : {
+            "type" : "string"
+          }
+        }
+      },
+      "JobConfigModel" : {
+        "required" : [ "inputs" ],
+        "type" : "object",
+        "properties" : {
+          "inputs" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "GateConnect" : {
+        "type" : "apiKey",
+        "name" : "x-gateconnect-key",
+        "in" : "header",
+        "x-amazon-apigateway-authtype" : "custom"
+      }
+    }
+  }
+}

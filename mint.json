@@ -27,18 +27,30 @@
   },
   "tabs": [
     {
-      "name": "API Reference",
+      "name": "Chat API Reference",
       "url": "api-reference",
       "openapi": "/api-reference/openapi.json"
-    }
+    },
+    {
+      "name": "Insightops API Reference",
+      "url": "insightops-api-reference",
+      "openapi": "/insightops-api-reference/GateConnect-InsightOps.json"
+    }    
   ],
   "navigation": [
     {
-      "group": "API Documentation",
+      "group": "Chat API Documentation",
       "pages": [
         "api-reference/introduction"
       ]
+    },
+    {
+      "group": "Insightops API Documentation",
+      "pages": [
+        "insightops-api-reference/introduction"
+      ]
     }
+
   ],
   "footerSocials": {
     "x": "https://x.com/gateaiai",

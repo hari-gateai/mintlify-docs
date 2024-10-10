@@ -1,0 +1,32 @@
+---
+title: 'Introduction'
+description: 'Description about GateConnect'
+---
+
+<Note>
+  GateConnect should be configured in the portal before accessing the same
+</Note>
+
+## Welcome
+
+There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+
+<Card
+  title="GateConnect Endpoints"
+  icon="leaf"
+  href="https://gist.github.com/hari-gateai/6c126cbe59cb6e513f16e17251c9b2b3/raw/89919f8a0d6ca016e4b2b0c20daf71712c83cccc/GateConnect-OpenAPISpec.yml"
+>
+  View the OpenAPI specification file
+</Card>
+
+## Authentication
+
+All API endpoints are authenticated using API Keys
+
+```json
+"security": [
+  {
+    "x-gateconnect-key": GA-abcd123
+  }
+]
+```

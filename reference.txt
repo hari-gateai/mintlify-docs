@@ -1,0 +1,1 @@
+npx @mintlify/scraping@latest openapi-file /insightops-api-reference/GateConect-InsightOps.json -o insightops-api-reference
