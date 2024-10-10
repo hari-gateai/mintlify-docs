@@ -15,12 +15,7 @@
     "url" : "https://gateai.document360.io/docs"
   },
   "servers" : [ {
-    "url" : "https://ikkdcom6ee.execute-api.us-west-2.amazonaws.com/{basePath}",
-    "variables" : {
-      "basePath" : {
-        "default" : "DEV"
-      }
-    }
+    "url" : "https://api-insightops.gateai.ai"
   } ],
   "paths" : {
     "/v1/digital-worker/job/status" : {
