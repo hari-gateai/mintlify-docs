@@ -14,7 +14,7 @@ There are two ways to build API documentation: [OpenAPI](https://mintlify.com/do
 <Card
   title="GateConnect Endpoints"
   icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  href="https://gist.github.com/hari-gateai/6c126cbe59cb6e513f16e17251c9b2b3/raw/89919f8a0d6ca016e4b2b0c20daf71712c83cccc/GateConnect-OpenAPISpec.yml"
 >
   View the OpenAPI specification file
 </Card>
@@ -26,7 +26,7 @@ All API endpoints are authenticated using API Keys
 ```json
 "security": [
   {
-    "bearerAuth": []
+    "x-gateconnect-key": GA-abcd123
   }
 ]
 ```
