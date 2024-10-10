@@ -38,7 +38,7 @@
         } ]
       }
     },
-    "/v1/digital-worker/job/status/{id}" : {
+    "/v1/digital-worker/job/status/{id+}" : {
       "get" : {
         "description" : "Get status of the job using job ID",
         "parameters" : [ {
