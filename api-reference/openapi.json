@@ -15,7 +15,7 @@
     "url" : "https://gateai.document360.io/docs"
   },
   "servers" : [ {
-    "url" : "https://api.gateai.ai"
+    "url" : "https://api-chat.gateai.ai"
   } ],
   "paths" : {
     "/v1/chat/message/response" : {
